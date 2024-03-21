@@ -1,16 +1,16 @@
-name: Setup Simba
-description: Download and setup Simba
+name: Setup Wasp Environment
+description: Download Simba, SRL-T and WaspLib
 author: Torwent
 branding:
   icon: flag
   color: green
 
 inputs:
-  setup-srl:
-    description: Wether to setup SRL or not
+  srlt:
+    description: Wether to setup SRL-T or not. If wasplib is true this will be ignored.
     required: false
-  setup-wasplib: # id of input
-    description: Wether to setup SRL or not
+  wasplib:
+    description: Wether to setup WaspLib or not. If this is true srlt will be ignored.
     required: false
 
 runs:
@@ -19,20 +19,20 @@ runs:
     - name: Setup Simba
       run: |
         mkdir ./Simba
-        curl --retry 5 -L -o ./Simba/Simba.exe https://github.com/ollydev/Simba/releases/download/simba1400-lape-update/Simba-Win32.exe
+        curl --retry 5 -L -o ./Simba/Simba.exe https://github.com/Torwent/Simba/releases/download/Simba1400/Simba-Win32.exe
         mkdir ./Simba/Includes/
         mkdir ./Simba/Scripts/
       shell: bash
 
-    - name: Setup SRL
-      if: ${{ inputs.setup-srl == 'true' }}
+    - name: Setup SRL-T
+      if: ${{ (inputs.wasplib == 'true') || (inputs.srlt == 'true') }}
       run: |
         cd ./Simba/Includes/
-        git clone https://github.com/ollydev/SRL.git
+        git clone https://github.com/Torwent/SRL-T.git
       shell: bash
 
     - name: Setup WaspLib
-      if: ${{ inputs.setup-wasplib == 'true' }}
+      if: ${{ inputs.wasplib == 'true' }}
       run: |
         cd ./Simba/Includes/
         git clone https://github.com/Torwent/WaspLib.git

@@ -4,13 +4,13 @@ jobs:
     runs-on: windows-latest
     name: Test Simba Setup
     steps:
-      - uses: actions/checkout@v2.2.0
+      - uses: actions/checkout@v4
       - name: Setup Simba
         uses: ./
         id: simba
         with:
-          setup-srl: true
-          setup-wasplib: true
+          srl: true
+          wasplib: true
       - name: Check result
         run: echo ${{ steps.simba.outputs.path }}
         shell: bash
