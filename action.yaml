@@ -9,9 +9,11 @@ inputs:
   srlt:
     description: Wether to setup SRL-T or not. If wasplib is true this will be ignored.
     required: false
+    default: true
   wasplib:
     description: Wether to setup WaspLib or not. If this is true srlt will be ignored.
     required: false
+    default: true
 
 runs:
   using: "composite"
