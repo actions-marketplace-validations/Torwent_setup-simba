@@ -17,23 +17,24 @@ runs:
   using: "composite"
   steps:
     - name: Setup Simba
+      shell: bash
       run: |
         mkdir ./Simba
         curl --retry 5 -L -o ./Simba/Simba.exe https://github.com/Torwent/Simba/releases/download/Simba1400/Simba-Win32.exe
+        chmod +x ./Simba/Simba.exe
         mkdir ./Simba/Includes/
         mkdir ./Simba/Scripts/
-      shell: bash
 
     - name: Setup SRL-T
       if: ${{ (inputs.wasplib == 'true') || (inputs.srlt == 'true') }}
+      shell: bash
       run: |
         cd ./Simba/Includes/
         git clone https://github.com/Torwent/SRL-T.git
-      shell: bash
 
     - name: Setup WaspLib
       if: ${{ inputs.wasplib == 'true' }}
+      shell: bash
       run: |
         cd ./Simba/Includes/
         git clone https://github.com/Torwent/WaspLib.git
-      shell: bash
